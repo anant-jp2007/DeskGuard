@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DeskGuard · Banking support</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='/chat.css').path }}?v=2">
+  <script src="{{ url_for('static', path='/chat.js').path }}?v=3" defer></script>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">D</span>
+        <div>
+          <p class="brand-name">DeskGuard</p>
+          <p class="brand-detail">Banking support</p>
+        </div>
+      </div>
+      <div class="sidebar-content">
+        <h2>Try a question</h2>
+        <div class="examples">
+          <button type="button">I lost my card. What now?</button>
+          <button type="button">Money was deducted but my transfer bounced. When will it come back?</button>
+          <button type="button">How long does a merchant refund take?</button>
+          <button type="button">How do I stop a UPI AutoPay subscription?</button>
+          <button type="button">Can I use my card abroad?</button>
+          <button type="button">What is my current balance?</button>
+        </div>
+      </div>
+      <p class="sidebar-note">Fictional bank demo. All policies are made up.</p>
+    </aside>
+
+    <main class="workspace">
+      <header class="topbar">
+        <p>{{ article_count }} public support articles</p>
+        <p class="mode">{{ 'Language model enabled' if model_enabled else 'Local passage preview' }}</p>
+      </header>
+      <section class="chat" aria-label="Support conversation">
+        <div class="intro">
+          <h1>How can I help?</h1>
+          <p>Ask about cards, transfers, UPI, refunds, sign-in, or account settings.</p>
+          {% if not model_enabled %}
+          <p class="mode-note">Preview mode shows matching article text. Add an API key to enable generated answers.</p>
+          {% endif %}
+        </div>
+        <div id="messages" role="log" aria-label="Chat messages" aria-live="polite"></div>
+      </section>
+      <footer class="composer">
+        <form id="question-form">
+          <label class="sr-only" for="question">Your question</label>
+          <input id="question" name="question" type="text" placeholder="Ask a support question…" required maxlength="1500" autocomplete="off">
+          <button id="send" type="submit">Send <span aria-hidden="true">↑</span></button>
+        </form>
+        <p>Use fictional questions and leave out personal banking details.</p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
